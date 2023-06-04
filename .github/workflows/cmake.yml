@@ -27,6 +27,7 @@ jobs:
       - name: Build
         run: |
           ${{ env.FC }} --version
-          make FC=$FC
+          ${{ env.CC }} --version
+          make FC=$FC 
         env:
           FC: ${{ steps.setup-fortran.outputs.fc }}

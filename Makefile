@@ -1,7 +1,7 @@
 FC=gfortran
 CC=gcc
-CFLAGS=-Wall -O2 -g
-FFLAGS=-Wall -fcheck=all -O2 -g
+CFLAGS=-O2 -g
+FFLAGS=-O2 -g
 
 ex1:
 	$(FC) --version
