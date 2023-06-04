@@ -28,7 +28,7 @@ jobs:
         run: |
           ${{ env.FC }} --version
           ${{ env.CC }} --version
-          # make FC=$FC CC=$CC -C testcase1
+          make FC=$FC CC=$CC -C testcase1
           make FC=$FC CC=$CC -C testcase2
         env:
           FC: ${{ steps.setup-fortran.outputs.fc }}
