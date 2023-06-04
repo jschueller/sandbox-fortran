@@ -8,5 +8,5 @@ ex1:
 	$(FC) $(FFLAGS) -c main1.f90 -o main1.o
 	$(CC) --version
 	$(CC) $(CFLAGS) -c func1.c -o func1.o
-	$(CC) func1.o main1.o -o main1
+	$(FC) func1.o main1.o -o main1
 	./main1
