@@ -29,6 +29,9 @@ jobs:
           ${{ env.FC }} --version
           ${{ env.CC }} --version
           make FC=$FC CC=$CC -C testcase1
-          make FC=$FC CC=$CC -C testcase2
+          # make FC=$FC CC=$CC -C testcase2
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_Fortran_COMPILER=${{ env.FC }} -DCMAKE_C_FLAGS="-Wall -Wextra" -LAH testcase2
+          make
+          ./main2
         env:
           FC: ${{ steps.setup-fortran.outputs.fc }}
