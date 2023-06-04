@@ -8,5 +8,5 @@ ex1:
 	$(FC) $(FFLAGS) -c routine1.f90 -o routine1.o
 	$(CC) --version
 	$(CC) $(CFLAGS) -c main2.c -o main2.o
-	$(FC) main2.o routine1.o -o main2
+	$(CC) main2.o routine1.o -o main2 -lgfortran
 	./main2
