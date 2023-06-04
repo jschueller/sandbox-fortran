@@ -7,6 +7,6 @@ ex1:
 	$(FC) --version
 	$(FC) $(FFLAGS) -c routine1.f90 -o routine1.o
 	$(CC) --version
-	$(CC) $(CFLAGS) -c main.c -o main.o
-	$(FC) main.o routine1.o -o main
-	./main
+	$(CC) $(CFLAGS) -c main2.c -o main2.o
+	$(FC) main2.o routine1.o -o main2
+	./main2
