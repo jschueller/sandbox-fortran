@@ -1,0 +1,32 @@
+name: CMake build
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain:
+          - {compiler: gcc, version: 11}
+          - {compiler: intel, version: '2023.1'}
+          - {compiler: intel-classic, version: '2021.9'}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install
+        run: sudo apt-get install cmake
+      - uses: awvwgk/setup-fortran@v1
+        id: setup-fortran
+        with:
+          compiler: ${{ matrix.toolchain.compiler }}
+          version: ${{ matrix.toolchain.version }}
+      - name: Build
+        run: |
+          ${{ env.FC }} --version
+          make
+        env:
+          FC: ${{ steps.setup-fortran.outputs.fc }}
