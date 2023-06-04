@@ -27,6 +27,7 @@ jobs:
       - name: Build
         run: |
           ${{ env.FC }} --version
+          grep -nr for_write_seq_lis_xmit /usr/lib/
           ${{ env.CC }} --version
           make FC=$FC CC=$CC -C testcase1
           make FC=$FC CC=$CC -C testcase2
