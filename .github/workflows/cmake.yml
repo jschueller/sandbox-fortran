@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install
-        run: sudo apt-get install cmake
+        run: sudo apt-get install cmake liblapack-dev libxml2-dev libboost-math-dev libcminpack-dev python3-dev swig libtbb-dev libceres-dev
       - uses: awvwgk/setup-fortran@v1
         id: setup-fortran
         with:
@@ -33,5 +33,10 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_Fortran_COMPILER=${{ env.FC }} -DCMAKE_C_FLAGS="-Wall -Wextra" -LAH testcase2
           make
           ./main2
+          git clone --depth 1 https://github.com/openturns/openturns.git
+          cd openturns
+          cmake -DCMAKE_CXX_FLAGS="-Wall" -DCMAKE_C_FLAGS="-Wall" -DCMAKE_UNITY_BUILD=ON -DCMAKE_UNITY_BUILD_BATCH_SIZE=32 -DCMAKE_INSTALL_PREFIX=$PWD/install .
+          make install
+          
         env:
           FC: ${{ steps.setup-fortran.outputs.fc }}
