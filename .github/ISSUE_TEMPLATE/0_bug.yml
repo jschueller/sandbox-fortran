@@ -44,9 +44,8 @@ body:
         conda info
         ```
       render: shell
-  
   - type: checkboxes
-    id: checks
+    id: oscheck
     attributes:
       label: OS
       description: Please provide the operating system.
@@ -56,7 +55,7 @@ body:
         - label: MacOS
         - label: Other
   - type: checkboxes
-    id: checks
+    id: sourcecheck
     attributes:
       label: Installation source
       description: Please provide the operating system.
