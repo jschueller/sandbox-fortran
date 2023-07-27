@@ -1,12 +1,8 @@
 name: Bug Report
 description: Create a bug report.
 labels:
-  - type::bug
+  - bug
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thank you for helping to make OpenTURNS better!
   - type: textarea
     id: what
     attributes:
@@ -18,7 +14,7 @@ body:
     id: info
     attributes:
       label: How to reproduce the issue?
-      description: Please add a minimal script that helps replicating the issue
+      description: Please add a minimal script that helps replicating the issue.
       render: shell
     validations:
       required: true
@@ -45,8 +41,8 @@ body:
         - Windows
         - Linux
         - MacOS
-        - All
-        - Other
+        - all
+        - other
     validations:
       required: true
   - type: dropdown
@@ -61,12 +57,12 @@ body:
         - Windows NSIS installer
         - Debian package
         - RPM package
-        - From source
-        - Other
+        - from source
+        - other
     validations:
       required: true
   - type: textarea
     id: context
     attributes:
       label: Additional Context
-      description: Include any additional information (or screenshots) that you think would be valuable.
+      description: Include any additional information that you think would be valuable.
