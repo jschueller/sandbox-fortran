@@ -20,6 +20,8 @@ body:
       label: How to reproduce the issue?
       description: Please add a minimal script that helps replicating the issue
       render: shell
+    validations:
+      required: true
   - type: textarea
     id: version
     attributes:
@@ -39,6 +41,7 @@ body:
       label: OS
       description: Please provide the operating system.
       options:
+        - unknown
         - Windows
         - Linux
         - MacOS
@@ -46,34 +49,22 @@ body:
         - Other
     validations:
       required: true
-  - type: checkboxes
+  - type: dropdown
     id: sourcecheck
     attributes:
       label: Installation media
       description: Please provide the installation media.
       options:
-        - label: pip
-        - label: conda
-        - label: Windows NSIS installer
-        - label: Debian package
-        - label: RPM package
-        - label: From source
-        - label: Other
+        - unknown
+        - pip
+        - conda
+        - Windows NSIS installer
+        - Debian package
+        - RPM package
+        - From source
+        - Other
     validations:
       required: true
-  - type: textarea
-    id: config
-    attributes:
-      label: Conda Config
-      description: |
-        Let's collect any customizations you may have for your conda install.
-
-        Please run the following command from your command line and paste the output below.
-
-        ```bash
-        conda config --show-sources
-        ```
-      render: shell
   - type: textarea
     id: context
     attributes:
