@@ -44,6 +44,29 @@ body:
         conda info
         ```
       render: shell
+  
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: OS
+      description: Please provide the operating system.
+      options:
+        - label: Windows
+        - label: Linux
+        - label: MacOS
+        - label: Other
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Installation source
+      description: Please provide the operating system.
+      options:
+        - label: pip
+        - label: conda
+        - label: Deb
+        - label: RPM
+        - label: From source
+        - label: Other
   - type: textarea
     id: config
     attributes:
