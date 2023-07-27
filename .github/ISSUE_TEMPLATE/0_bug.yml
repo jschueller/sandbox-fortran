@@ -6,24 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Because processing new bug reports is time-consuming, we would like to ask you to fill out the following form to the best of your ability and as completely as possible.
-
-        > **Note**
-        > Bug reports that are incomplete or missing information may be closed as inactionable.
-
-        Since there are already a lot of open issues, please also take a moment to search existing ones to see if your bug has already been reported. If you find something related, please upvote that issue and provide additional details as necessary.
-
         Thank you for helping to make OpenTURNS better!
-  - type: checkboxes
-    id: checks
-    attributes:
-      label: Checklist
-      description: Please confirm and check all of the following options.
-      options:
-        - label: I added a descriptive title
-          required: true
-        - label: I searched open reports and couldn't find a duplicate
-          required: true
   - type: textarea
     id: what
     attributes:
@@ -75,6 +58,8 @@ body:
         - label: RPM
         - label: From source
         - label: Other
+    validations:
+      required: true
   - type: textarea
     id: config
     attributes:
