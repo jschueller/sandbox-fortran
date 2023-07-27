@@ -35,8 +35,21 @@ body:
     id: info
     attributes:
       label: How to reproduce the issue?
-      description: Please add a minimal script that helps reproducing the issue
+      description: Please add a minimal script that helps replicating the issue
       render: shell
+  - type: textarea
+    id: version
+    attributes:
+      label: OpenTURNS version
+      description: |
+        Please tell us the OT version you are using.
+
+         ```python
+         import openturns as ot
+         print(ot.__version__)
+         ```
+    validations:
+      required: true
   - type: checkboxes
     id: oscheck
     attributes:
@@ -46,12 +59,13 @@ body:
         - label: Windows
         - label: Linux
         - label: MacOS
+        - label: All
         - label: Other
   - type: checkboxes
     id: sourcecheck
     attributes:
-      label: Installation source
-      description: Please provide the operating system.
+      label: Installation media
+      description: Please provide the installation media.
       options:
         - label: pip
         - label: conda
