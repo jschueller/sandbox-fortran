@@ -61,6 +61,8 @@ body:
         - label: MacOS
         - label: All
         - label: Other
+    validations:
+      required: true
   - type: checkboxes
     id: sourcecheck
     attributes:
