@@ -50,17 +50,17 @@ body:
          ```
     validations:
       required: true
-  - type: checkboxes
+  - type: dropdown
     id: oscheck
     attributes:
       label: OS
       description: Please provide the operating system.
       options:
-        - label: Windows
-        - label: Linux
-        - label: MacOS
-        - label: All
-        - label: Other
+        - Windows
+        - Linux
+        - MacOS
+        - All
+        - Other
     validations:
       required: true
   - type: checkboxes
