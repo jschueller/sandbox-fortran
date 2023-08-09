@@ -35,3 +35,32 @@ jobs:
           ./main2
         env:
           FC: ${{ steps.setup-fortran.outputs.fc }}
+
+
+  linux2:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain:
+          - {compiler: aflang, cflags: '-Wall', fflags: '-pedantic -Weverything -Wall -Wextra -Minform=warn -Mstandard -Mrecursive'}
+          - {compiler: nvfortran, cflags: '-Wall', fflags: '-C -Wall -Wextra -Minform=warn -Mstandard -Mrecursive -Mbounds -Mchkstk -Mchkptr'}
+          - {compiler: flang, cflags: '-Wall', fflags: '-pedantic -Weverything -Wall -Wextra'}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Fetch install scripts
+        run: git clone https://github.com/equipez/github_actions_scripts.git .github/scripts
+      - name: Install AOCC
+        if: ${{ matrix.toolchain.compiler == 'aflang' }}
+        run: bash .github/scripts/install_aocc
+      - name: Install nvfortran
+        if: ${{ matrix.toolchain.compiler == 'nvfortran' }}
+        run: bash .github/scripts/install_nvfortran
+      - name: Install Flang
+        if: ${{ matrix.toolchain.compiler == 'flang' }}
+        run: bash .github/scripts/install_flang
+      - name: Build
+        run: |
+          make FC=$FC -C testcase3
+        env:
+          FC: ${{ matrix.toolchain.compiler }}
