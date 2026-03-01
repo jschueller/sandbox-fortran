@@ -6,61 +6,26 @@ permissions:
   contents: read
 
 jobs:
-  linux:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        toolchain:
-          - {compiler: gcc, version: 11}
-          - {compiler: intel, version: '2023.1'}
-          - {compiler: intel-classic, version: '2021.9'}
+  windows:
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Install
-        run: sudo apt-get install cmake
-      - uses: awvwgk/setup-fortran@v1
-        id: setup-fortran
+      - uses: actions/checkout@v6
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          compiler: ${{ matrix.toolchain.compiler }}
-          version: ${{ matrix.toolchain.version }}
-      - name: Build
+          miniforge-version: latest
+      - name: Install
+        shell: cmd
         run: |
-          ${{ env.FC }} --version
-          ${{ env.CC }} --version
-          make FC=$FC CC=$CC -C testcase1
-          # make FC=$FC CC=$CC -C testcase2
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_Fortran_COMPILER=${{ env.FC }} -DCMAKE_C_FLAGS="-Wall -Wextra" -LAH testcase2
-          make
-          ./main2
-        env:
-          FC: ${{ steps.setup-fortran.outputs.fc }}
-
-
-  linux2:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        toolchain:
-          - {compiler: aflang, cflags: '-Wall', fflags: '-pedantic -Weverything -Wall -Wextra -Minform=warn -Mstandard -Mrecursive'}
-          - {compiler: nvfortran, cflags: '-Wall', fflags: '-C -Wall -Wextra -Minform=warn -Mstandard -Mrecursive -Mbounds -Mchkstk -Mchkptr'}
-          - {compiler: flang, cflags: '-Wall', fflags: '-pedantic -Weverything -Wall -Wextra'}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Fetch install scripts
-        run: git clone https://github.com/equipez/github_actions_scripts.git .github/scripts
-      - name: Install AOCC
-        if: ${{ matrix.toolchain.compiler == 'aflang' }}
-        run: bash .github/scripts/install_aocc
-      - name: Install nvfortran
-        if: ${{ matrix.toolchain.compiler == 'nvfortran' }}
-        run: bash .github/scripts/install_nvfortran
-      - name: Install Flang
-        if: ${{ matrix.toolchain.compiler == 'flang' }}
-        run: bash .github/scripts/install_flang
+          conda install -y pip
       - name: Build
+        shell: cmd
         run: |
-          make FC=$FC -C testcase3
-        env:
-          FC: ${{ matrix.toolchain.compiler }}
+          pip install otmorris
+          python -c "import openturns; print(42)"
+          echo "ok doki"
+          python -c "import otrobopt; print(42)"
+          echo "ok doki"
+          python -c "import otmorris; print(42)"
+          echo "ok doki"
+
+  
